@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import InteractDemo from "./components/InteractDemo";
+import PathDemo from "./components/PathDemo"
 
 function App() {
+  const [page, setPage] = useState("interact");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="Header">
+        <div className="Header_item" onClick={() => setPage("interact")}>
+          threejs交互
+        </div>
+        <div className="Header_item" onClick={() => setPage("pathAnimate")}>
+          threejs路径动画
+        </div>
+      </div>
+      <div className="Main">
+        {(() => {
+          console.log(page);
+          switch (page) {
+            case "interact":
+              return <InteractDemo />;
+            case "pathAnimate":
+              return <PathDemo />;
+            default:
+              return <div>default</div>;
+          }
+        })()}
+      </div>
     </div>
   );
 }
